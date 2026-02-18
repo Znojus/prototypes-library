@@ -1,5 +1,30 @@
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 20px;
+
+    font-size: 1.5em;
+}
+
+.card-container > div {
+    display: grid;
+    justify-content: center;
+    gap: 10px;
+
+    border-radius: 40px;
+    background-color: rgb(197, 197, 197);
+    padding: 20px;
+}
+
+.card-container > div > div {
+    display: flex;
+    justify-content: center;
+}
+
+.book-title {
+    font-size: 1.6em;
+}
+
+.book-author {
+    font-size: 1.3em;
 }

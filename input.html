@@ -9,5 +9,37 @@
 </head>
 <body>
     <div class="card-container"></div>
+
+    <dialog id="dialog">
+        <form method="dialog">
+            <p>
+                <div class="input">
+                    <label for="title">Book title: </label>
+                    <input type="text" name="title" id="title" required>
+                </div>
+                <div class="input">
+                    <label for="author">Book author: </label>
+                    <input type="text" name="author" id="author" required>
+                </div>
+                <div class="input">
+                    <label for="pages">How may pages does the book have?: </label>
+                    <input type="number" name="pages" id="pages" required>
+                </div>
+                <div class="input">
+                    <label for="year">When was it released?: </label>
+                    <input type="number" name="year" id="year" required>
+                </div>
+            </p>
+            <div>
+                <input type="submit" id="normal-close" value="Submit" />
+                <input type="submit" id="novalidate-close" value="Cancel" formnovalidate />
+            </div>
+        </form>
+    </dialog>
+
+    <p>
+        <button id="show-dialog">Show the dialog</button>
+    </p>
+    <output></output>
 </body>
 </html>

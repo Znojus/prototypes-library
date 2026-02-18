@@ -25,38 +25,67 @@ addBookToLibrary("Ar zinai?", "Bredas Pitas", 228, 2001, false)
 
 const cardContainer = document.querySelector(".card-container")
 
-cardContainer.style.backgroundColor = "beige";
+function displayBooks() {
+        cardContainer.innerHTML = ""
+        myLibrary.forEach(book => {
+        let tempDiv = document.createElement("div");
 
-myLibrary.forEach(book => {
-    let tempDiv = document.createElement("div");
-    tempDiv.style.backgroundColor = "honeydew";
+        let titleDiv = document.createElement("div");
+        let authorDiv = document.createElement("div");
+        let pagesDiv = document.createElement("div");
+        let yearDiv = document.createElement("div");
+        let isReadDiv = document.createElement("div");
 
-    let titleDiv = document.createElement("div");
-    let authorDiv = document.createElement("div");
-    let pagesDiv = document.createElement("div");
-    let yearDiv = document.createElement("div");
-    let isReadDiv = document.createElement("div");
+        titleDiv.setAttribute("class", "book-title");
+        authorDiv.setAttribute("class", "book-author");
+        pagesDiv.setAttribute("class", "book-pages");
+        yearDiv.setAttribute("class", "book-year");
+        isReadDiv.setAttribute("class", "book-read");
 
-    titleDiv.setAttribute("class", "book-title");
-    authorDiv.setAttribute("class", "book-author");
-    pagesDiv.setAttribute("class", "book-pages");
-    yearDiv.setAttribute("class", "book-year");
-    isReadDiv.setAttribute("class", "book-read");
+        authorDiv.innerText = book.author;
+        titleDiv.innerText = book.title;
+        pagesDiv.innerText = `${book.pages} pages`;
+        yearDiv.innerText = book.year;
+        isReadDiv.innerText = book.isRead ? "Read" : "Not Read";
 
-    authorDiv.innerText = book.author;
-    titleDiv.innerText = book.title;
-    pagesDiv.innerText = book.pages;
-    yearDiv.innerText = book.year;
-    isReadDiv.innerText = book.isRead ? "Read" : "Not Read";
+        tempDiv.appendChild(titleDiv);
+        tempDiv.appendChild(authorDiv);
+        tempDiv.appendChild(pagesDiv);
+        tempDiv.appendChild(yearDiv);
+        tempDiv.appendChild(isReadDiv);
 
-    tempDiv.appendChild(titleDiv);
-    tempDiv.appendChild(authorDiv);
-    tempDiv.appendChild(pagesDiv);
-    tempDiv.appendChild(yearDiv);
-    tempDiv.appendChild(isReadDiv);
+        cardContainer.appendChild(tempDiv);
+    });
+}
 
-    cardContainer.appendChild(tempDiv);
+displayBooks();
+
+const showBtn = document.getElementById("show-dialog");
+const dialog = document.getElementById("dialog");
+const submitBtn = document.getElementById("normal-close");
+const selected = dialog.querySelector("title");
+
+showBtn.addEventListener("click", () => {
+    dialog.showModal();
 });
+
+submitBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const form = document.querySelector('form')
+
+    if (form.reportValidity()) {
+        addBookToLibrary(
+            document.querySelector("#author").value,
+            document.querySelector("#title").value,
+            document.querySelector("#pages").value,
+            document.querySelector("#year").value,
+            false
+        )
+        dialog.close();
+        displayBooks();
+    };
+})
 
 
 console.log(myLibrary);
