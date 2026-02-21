@@ -28,3 +28,8 @@
 .book-author {
     font-size: 1.3em;
 }
+
+form {
+    display: grid;
+    gap: 20px;
+}
