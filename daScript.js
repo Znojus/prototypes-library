@@ -62,7 +62,7 @@ function displayBooks() {
         removeBtn.addEventListener("click", (event) => {
             let toRemoveId = myLibrary.findIndex((arrBook) => arrBook.id === book.id);
             console.log(toRemoveId);
-            myLibrary.splice(toRemoveId, toRemoveId + 1);
+            myLibrary.splice(toRemoveId, 1);
             displayBooks();
         })
         tempDiv.appendChild(removeBtn);
