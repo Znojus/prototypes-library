@@ -58,18 +58,20 @@ function displayBooks() {
         removeBtn.setAttribute("class", "remove-button");
         removeBtn.setAttribute("data-id", book.id); //---------------------
         removeBtn.innerText = "Remove book";
-
-        removeBtn.addEventListener("click", (event) => {
-            let toRemoveId = myLibrary.findIndex((arrBook) => arrBook.id === book.id);
-            console.log(toRemoveId);
-            myLibrary.splice(toRemoveId, 1);
-            displayBooks();
-        })
         tempDiv.appendChild(removeBtn);
 
         cardContainer.appendChild(tempDiv);
     });
 }
+
+cardContainer.addEventListener("click", (event) => {
+    if(event.target.classList.contains("remove-button")) {
+        const bookId = event.target.dataset.id;
+        const index = myLibrary.findIndex(book => book.id === bookId);
+        myLibrary.splice(index, 1);
+        displayBooks();
+    }
+})
 
 displayBooks();
 
