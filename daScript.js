@@ -72,7 +72,15 @@ showBtn.addEventListener("click", () => {
 submitBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
-    const form = document.querySelector('form')
+    const form = document.querySelector('form');
+    let read_status;
+    var ele = document.getElementsByName("read_status");
+
+    for (i = 0; i < ele.length; i++) {
+        if (ele[i].checked) {
+            read_status = ele[i].value;
+        } 
+    } 
 
     if (form.reportValidity()) {
         addBookToLibrary(
@@ -80,7 +88,7 @@ submitBtn.addEventListener("click", (event) => {
             document.querySelector("#title").value,
             document.querySelector("#pages").value,
             document.querySelector("#year").value,
-            false
+            read_status === "true"
         )
         dialog.close();
         displayBooks();
