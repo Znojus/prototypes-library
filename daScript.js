@@ -54,6 +54,19 @@ function displayBooks() {
         tempDiv.appendChild(yearDiv);
         tempDiv.appendChild(isReadDiv);
 
+        let removeBtn = document.createElement("button");
+        removeBtn.setAttribute("class", "remove-button");
+        removeBtn.setAttribute("data-id", book.id); //---------------------
+        removeBtn.innerText = "Remove book";
+
+        removeBtn.addEventListener("click", (event) => {
+            let toRemoveId = myLibrary.findIndex((arrBook) => arrBook.id === book.id);
+            console.log(toRemoveId);
+            myLibrary.splice(toRemoveId, toRemoveId + 1);
+            displayBooks();
+        })
+        tempDiv.appendChild(removeBtn);
+
         cardContainer.appendChild(tempDiv);
     });
 }
@@ -94,6 +107,5 @@ submitBtn.addEventListener("click", (event) => {
         displayBooks();
     };
 })
-
 
 console.log(myLibrary);
