@@ -13,6 +13,11 @@ function Book(author, title, pages, year, isRead) {
     this.id = crypto.randomUUID()
 }
 
+Book.prototype.toggleRead = function () {
+    console.log(`This book is read, right? ${this.isRead}`);
+    this.isRead = !this.isRead;
+}
+
 function addBookToLibrary(author, title, pages, year, isRead) {
     myLibrary.push(new Book(author, title, pages, year, isRead));
 }
@@ -46,6 +51,12 @@ function displayBooks() {
         yearDiv.innerText = book.year;
         isReadDiv.innerText = book.isRead ? "Read" : "Not Read";
 
+        let toggleReadBtn = document.createElement("button");
+        toggleReadBtn.setAttribute("class", "toggle-button");
+        toggleReadBtn.setAttribute("data-id", book.id);
+        toggleReadBtn.innerText = "Change status";
+        isReadDiv.appendChild(toggleReadBtn);
+
         tempDiv.appendChild(titleDiv);
         tempDiv.appendChild(authorDiv);
         tempDiv.appendChild(pagesDiv);
@@ -58,6 +69,7 @@ function displayBooks() {
         removeBtn.innerText = "Remove book";
         tempDiv.appendChild(removeBtn);
 
+
         cardContainer.appendChild(tempDiv);
     });
 }
@@ -67,6 +79,15 @@ cardContainer.addEventListener("click", (event) => {
         const bookId = event.target.dataset.id;
         const index = myLibrary.findIndex(book => book.id === bookId);
         myLibrary.splice(index, 1);
+        displayBooks();
+    }
+})
+
+cardContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("toggle-button")) {
+        const bookId = event.target.dataset.id;
+        const index = myLibrary.findIndex(book => book.id === bookId);
+        myLibrary[index].toggleRead();
         displayBooks();
     }
 })
